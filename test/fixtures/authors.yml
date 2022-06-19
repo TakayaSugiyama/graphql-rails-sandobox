@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  firstname: MyString
+  lastname: MyString
+  yob: 1
+  is_alive: false
+
+two:
+  firstname: MyString
+  lastname: MyString
+  yob: 1
+  is_alive: false

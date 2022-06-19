@@ -1,17 +1,22 @@
 module Types
   class QueryType < Types::BaseObject
+    description "The query root of this schema"
     # Add `node(id: ID!) and `nodes(ids: [ID!]!)`
     include GraphQL::Types::Relay::HasNodeField
     include GraphQL::Types::Relay::HasNodesField
 
-    # Add root-level fields here.
-    # They will be entry points for queries on your schema.
+    field :author, Types::AuthorType, null: true, description: "Returns one Author instance" do
+      argument :id, ID, required: true
+    end
 
-    # TODO: remove me
-    field :test_field, String, null: false,
-      description: "An example field added by the generator"
-    def test_field
-      "Hello World!"
+    def author(id:)
+      Author.where(id: id).first
+    end
+
+    field :authors, [Types::AuthorType], null: false
+
+    def authors
+      Author.all
     end
   end
 end
