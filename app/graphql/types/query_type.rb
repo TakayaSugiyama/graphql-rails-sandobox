@@ -5,18 +5,7 @@ module Types
     include GraphQL::Types::Relay::HasNodeField
     include GraphQL::Types::Relay::HasNodesField
 
-    field :author, Types::AuthorType, null: true, description: "Returns one Author instance" do
-      argument :id, ID, required: true
-    end
-
-    def author(id:)
-      Author.where(id: id).first
-    end
-
-    field :authors, [Types::AuthorType], null: false
-
-    def authors
-      Author.all
-    end
+    field :author, resolver: Resolvers::Author, description: "Returns one Author instance"
+    field :authors, resolver: Resolvers::Authors, description: "Return All Authors"
   end
 end
