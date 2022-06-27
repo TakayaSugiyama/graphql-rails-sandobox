@@ -12,5 +12,11 @@ module Types
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
     field :full_name, String, null: false
     field :location, Types::LocationType, null: false
+
+    field :errors, [Types::ErrorType], null: false
+
+    def errors
+      object.errors.map { |e| { field_name: e.attribute, errors: object.errors[e.attribute] } }
+    end
   end
 end
