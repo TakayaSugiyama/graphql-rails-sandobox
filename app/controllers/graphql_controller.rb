@@ -10,7 +10,8 @@ class GraphqlController < ApplicationController
     operation_name = params[:operationName]
     session = Session.find_by(key: request.headers['Authorization'])
     context = {
-      current_user: User.find_by(email: session&.user&.email)
+      current_user: User.find_by(email: session&.user&.email),
+      session: session&.id
     }
     Rails.logger.info context
     result = GraphqlRailsSandoboxSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
