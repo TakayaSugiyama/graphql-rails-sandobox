@@ -8,10 +8,11 @@ class GraphqlController < ApplicationController
     variables = prepare_variables(params[:variables])
     query = params[:query]
     operation_name = params[:operationName]
+    session = Session.find_by(key: request.headers['Authorization'])
     context = {
-      # Query context goes here, for example:
-      # current_user: current_user,
+      current_user: User.find_by(email: session&.user&.email)
     }
+    Rails.logger.info context
     result = GraphqlRailsSandoboxSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
     render json: result
   rescue StandardError => e

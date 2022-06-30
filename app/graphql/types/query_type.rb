@@ -8,5 +8,6 @@ module Types
     field :author, resolver: Resolvers::Author, description: "Returns one Author instance"
     field :authors, resolver: Resolvers::Authors, description: "Return All Authors"
     field :login, resolver: Resolvers::Login, description: "return login key"
+    field :current_user, resolver: Resolvers::CurrentUser, description: "return current user"
   end
 end
